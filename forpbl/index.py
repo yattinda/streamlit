@@ -7,7 +7,8 @@ from bs4 import BeautifulSoup
 import time
 from tqdm import tqdm
 
-st.title('きれい')
+st.title('住みやすい街検索')
+st.write('### test')
 
 def lord(filename):
     content = np.loadtxt(filename, delimiter=',', skiprows=1,)
@@ -46,12 +47,19 @@ with st.sidebar:
         address = st.text_input("住所入力（部分一致）", "新宿区")
         run = st.form_submit_button('Run')
 
+
 if run:
     data_load_state = st.text('Loading data...')
     longlat = (coordinate(address))
     longlat_float = [float(n) for n in longlat]
     content = np.array(lord("data/NDVI_Japan.csv"))
     nearrest_coor  = neighbourhood(longlat_float, content)
-    st.write(longlat_float)
-    st.write((nearrest_coor[1], nearrest_coor[2], nearrest_coor[3] ))
-    data_load_state.text("Done! (using st.cache)")
+    nearrest_longlat = {
+     'lon' : [nearrest_coor[1]],
+     'lat' : [nearrest_coor[2]],
+    }
+    # st.write(longlat_float)
+    # st.write((nearrest_coor[1], nearrest_coor[2], nearrest_coor[3]))
+    map_data = pd.DataFrame(nearrest_longlat)
+    st.map(map_data)
+    data_load_state.success("Done!")
