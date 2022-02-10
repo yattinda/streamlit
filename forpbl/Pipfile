@@ -13,6 +13,7 @@ pandas = "*"
 requests = "*"
 beautifulsoup4 = "*"
 tqdm = "*"
+flake8 = "*"
 
 [requires]
 python_version = "3.8"
