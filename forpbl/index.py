@@ -62,7 +62,12 @@ if run:
      'lat' : [longlat_float[1]]
     }
     # st.write(longlat_float)
-    st.write((nearrest_coor_ndvi[1], nearrest_coor_ndvi[2], nearrest_coor_ndvi[3]))
+    # st.write((nearrest_coor_ndvi[1], nearrest_coor_ndvi[2], nearrest_coor_ndvi[3]))
+    st.write("## 植生スコア : {}　空気スコア : {}".format(nearrest_coor_ndvi[3], nearrest_coor_air[2]))
+    st.bar_chart({
+    "スコア": [nearrest_coor_ndvi[3], nearrest_coor_air[2]],
+    # "空気スコア": [nearrest_coor_air[2]]
+    })
     map_data = pd.DataFrame(nearrest_longlat)
     st.map(map_data)
     data_load_state.success("Success!!")
