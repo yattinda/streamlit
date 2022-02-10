@@ -18,8 +18,8 @@ def lord(filename):
 def neighbourhood(p0, ps):
     L = np.array([])
     for i in range(ps.shape[0]):
-        norm = np.sqrt((ps[i][1] - p0[0])*(ps[i][1] - p0[0]) +
-                       (ps[i][2] - p0[1])*(ps[i][2] - p0[1]))
+        norm = np.sqrt((ps[i][0] - p0[0])*(ps[i][0] - p0[0]) +
+                       (ps[i][1] - p0[1])*(ps[i][1] - p0[1]))
         L = np.append(L, norm)
     return ps[np.argmin(L)]
 
