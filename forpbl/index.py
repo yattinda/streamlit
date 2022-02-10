@@ -69,5 +69,5 @@ if run:
     # "空気スコア": [nearrest_coor_air[2]]
     })
     map_data = pd.DataFrame(nearrest_longlat)
-    st.map(map_data)
+    st.map(map_data, zoom = 13)
     data_load_state.success("Success!!")
