@@ -10,6 +10,7 @@ from tqdm import tqdm
 st.title('住みやすい街検索')
 st.write('### test')
 
+@st.cache
 def lord(filename):
     content = np.loadtxt(filename, delimiter=',', skiprows=1,)
     return content
@@ -52,14 +53,16 @@ if run:
     data_load_state = st.text('Loading data...')
     longlat = (coordinate(address))
     longlat_float = [float(n) for n in longlat]
-    content = np.array(lord("data/NDVI_Japan.csv"))
-    nearrest_coor  = neighbourhood(longlat_float, content)
+    content_ndvi = np.array(lord("data/NDVI_Japan.csv"))
+    content_air = np.array(lord("data/air_Japan.csv"))
+    nearrest_coor_ndvi  = neighbourhood(longlat_float, content_ndvi)
+    nearrest_coor_air  = neighbourhood(longlat_float, content_air)
     nearrest_longlat = {
-     'lon' : [nearrest_coor[1]],
-     'lat' : [nearrest_coor[2]],
+     'lon' : [longlat_float[0]],
+     'lat' : [longlat_float[1]]
     }
     # st.write(longlat_float)
-    # st.write((nearrest_coor[1], nearrest_coor[2], nearrest_coor[3]))
+    st.write((nearrest_coor_ndvi[1], nearrest_coor_ndvi[2], nearrest_coor_ndvi[3]))
     map_data = pd.DataFrame(nearrest_longlat)
     st.map(map_data)
-    data_load_state.success("Done!")
+    data_load_state.success("Success!!")
